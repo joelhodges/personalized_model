@@ -69,5 +69,5 @@ print(f"Accuracy: {accuracy}")
 # Save the model to use for testing
 model.save(model_file)
 
-with open(r'./'+outfile, 'w') as fp:
+with open(r'./'+label_file, 'w') as fp:
     fp.write('\n'.join(folders))

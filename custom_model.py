@@ -35,6 +35,12 @@ for folder in folders:
         img = cv.cvtColor(resized, cv.COLOR_BGR2RGB)
         img = img/255
         img = img.tolist()
+
+        # If last image is reached with no images in the test group, add the last image to the test group
+        if(count == num_images-1) and (folders.index(folder) not in test_labels):
+            test_images.append(img)
+            test_labels.append(folders.index(folder))
+            continue
         
         # Split data between training and testing
         # Can be modified using the TRAIN_TEST_SPLIT constant

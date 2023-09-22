@@ -21,3 +21,7 @@ After you run ```custom_model.py```, you can then run ```predictor.py``` to see 
 
 ## Video Training
 The file ```video_training.py``` can be used to train a model on videos rather than folders of images.  The process is the same as outlined above for images, except your 'database' folder should be a folder with videos inside, rather than a folder of folders of images.
+
+Currently, the labels will be the entire name of the video, including the extension (i.e., a label for an object would look like 'object.mp4') but this could be fixed fairly easily to remove the extension.
+
+```.mov```, ```.mp4```, and ```.avi``` files should all be acceptable.

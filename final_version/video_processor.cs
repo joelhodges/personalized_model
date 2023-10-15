@@ -92,7 +92,7 @@ class VideoProcessor
                     Mat resized = new Mat();
                     Cv2.Resize(currentFrame, resized, new Size(SIZE, SIZE), interpolation: InterpolationFlags.Area);
                     Cv2.ImWrite(downsized + "\\image_" + count.ToString() + ".jpg", resized);
-                    count = count + 1;
+                    count++;
                 
                     // Take a certain number of steps to get to approximately NUM_SAMPLES images
                     for (int i = 0; i < step; i++){
@@ -109,7 +109,7 @@ class VideoProcessor
                 Mat resized = new Mat();
                 Cv2.Resize(image, resized, new Size(SIZE, SIZE), interpolation: InterpolationFlags.Area);
                 Cv2.ImWrite(downsized + "\\image_" + count.ToString() + ".jpg", resized);
-                count = count + 1;
+                count++;
             }
         }
     }
@@ -147,7 +147,7 @@ class VideoProcessor
             }
             // All images are included in the model, so less samples are needed from the videos for each image found
             else if(fileType == 1){
-                neededSamples = neededSamples - 1;
+                neededSamples--;
             }
         }
         return frameCount/neededSamples;

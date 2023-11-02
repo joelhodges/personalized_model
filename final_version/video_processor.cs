@@ -6,23 +6,23 @@ class VideoProcessor
 {
     const int NUM_SAMPLES = 20; // Number of images to use to train the model
     const int SIZE = 128; // Image size, in pixels
-    
+
     // Allowed extensions for videos and images
     string[] VIDEO_EXTENSIONS = new string[2]{".mov",".mp4"};
     string[] IMAGE_EXTENSIONS = new string[3]{".jpg",".jpeg",".png"};
 
     public VideoProcessor(string rootFolder, string modelFile)
     {
-        string[] folders = Directory.GetDirectories(rootFolder); // Stores all folder names within the database
+        string[] folders = Directory.GetDirectories(rootFolder + "\\Gallery"); // Stores all folder names within the database
 
-        System.DateTime modelTime = GetUpdateTime(modelFile); // The last update time of the model
+        System.DateTime modelTime = Directory.GetLastWriteTime(modelFile); // The last update time of the model
         List<string>need_proc = new List<string>(); // Stores all folders that need to be reprocessed
 
         // Look through each folder in the database
         foreach (string folder in folders)
         {
             // Gets the last time the Gallery was modified for the current object
-            System.DateTime galleryModTime = GetUpdateTime(folder + "\\Gallery");
+            System.DateTime galleryModTime = GetUpdateTime(folder);
             
             // Gallery only needs reprocessing if it has been updated since the last time the model was trained
             if (modelTime < galleryModTime)
@@ -53,8 +53,8 @@ class VideoProcessor
 
     public void Downsize(string folder)
     {
-        string gallery = folder + "\\Gallery"; // The path to the Gallery folder for the current object
-        string downsized = folder + "\\Model"; // The path to the Model folder for the current object
+        string gallery = folder; // The path to the Gallery folder for the current object
+        string downsized = folder.Replace("Gallery", "Model"); // The path to the Model folder for the current object
         int step = GetStepSize(gallery);
         int count = 0;
         

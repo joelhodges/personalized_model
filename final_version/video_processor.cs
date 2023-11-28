@@ -13,7 +13,7 @@ class VideoProcessor
 
     public VideoProcessor(string rootFolder, string modelFile)
     {
-        string[] folders = Directory.GetDirectories(rootFolder + "\\Gallery"); // Stores all folder names within the database
+        string[] folders = Directory.GetDirectories(rootFolder + "/Gallery"); // Stores all folder names within the database
 
         System.DateTime modelTime = Directory.GetLastWriteTime(modelFile); // The last update time of the model
         List<string>need_proc = new List<string>(); // Stores all folders that need to be reprocessed
@@ -91,7 +91,7 @@ class VideoProcessor
                     // Resize current frame and write to the Model folder
                     Mat resized = new Mat();
                     Cv2.Resize(currentFrame, resized, new Size(SIZE, SIZE), interpolation: InterpolationFlags.Area);
-                    Cv2.ImWrite(downsized + "\\image_" + count.ToString() + ".jpg", resized);
+                    Cv2.ImWrite(downsized + "/image_" + count.ToString() + ".jpg", resized);
                     count++;
                 
                     // Take a certain number of steps to get to approximately NUM_SAMPLES images
@@ -108,7 +108,7 @@ class VideoProcessor
                 Mat image = Cv2.ImRead(gallery + '/' + file);
                 Mat resized = new Mat();
                 Cv2.Resize(image, resized, new Size(SIZE, SIZE), interpolation: InterpolationFlags.Area);
-                Cv2.ImWrite(downsized + "\\image_" + count.ToString() + ".jpg", resized);
+                Cv2.ImWrite(downsized + "/image_" + count.ToString() + ".jpg", resized);
                 count++;
             }
         }
